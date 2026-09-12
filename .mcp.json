@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "json2video": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@json2video/cli", "mcp"],
+      "env": {
+        "JSON2VIDEO_API_KEY": "${JSON2VIDEO_API_KEY}"
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "comment": "Compass Rose silent Reel dry-run — no audio. Production: Sandals/Beaches UVI assets only. Images must use resize:cover (not fit).",
+  "quality": "high",
+  "resolution": "custom",
+  "width": 1080,
+  "height": 1920,
+  "scenes": [
+    {
+      "duration": 3,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://cdn.json2video.com/assets/images/london-01.jpg",
+          "resize": "cover"
+        },
+        {
+          "type": "text",
+          "text": "All-inclusive isn't\nthe flex you think",
+          "y": 1400,
+          "style": "008",
+          "settings": {
+            "font-size": "72px",
+            "color": "white",
+            "font-weight": "800",
+            "text-shadow": "0 2px 12px rgba(0,0,0,.75)"
+          }
+        }
+      ]
+    },
+    {
+      "duration": 3,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://cdn.json2video.com/assets/images/london-02.jpg",
+          "resize": "cover"
+        },
+        {
+          "type": "text",
+          "text": "The airport currency\ndesk is not your friend",
+          "y": 1400,
+          "style": "008",
+          "settings": {
+            "font-size": "72px",
+            "color": "white",
+            "font-weight": "800",
+            "text-shadow": "0 2px 12px rgba(0,0,0,.75)"
+          }
+        }
+      ]
+    },
+    {
+      "duration": 3,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://cdn.json2video.com/assets/images/london-01.jpg",
+          "resize": "cover"
+        },
+        {
+          "type": "text",
+          "text": "Ask me before you\nbook the 'deal'",
+          "y": 1400,
+          "style": "008",
+          "settings": {
+            "font-size": "72px",
+            "color": "white",
+            "font-weight": "800",
+            "text-shadow": "0 2px 12px rgba(0,0,0,.75)"
+          }
+        }
+      ]
+    }
+  ]
+}

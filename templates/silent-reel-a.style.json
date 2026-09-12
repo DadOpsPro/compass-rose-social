@@ -1,0 +1,28 @@
+{
+  "comment": "Look reference for locked Sandals couples Reel A — do not regenerate Chris's Canva A. Silent 9:16 full-bleed. Keep one type system per Reel. Beat 5 often carries quiz/CTA link in production copy.",
+  "quality": "high",
+  "resolution": "custom",
+  "width": 1080,
+  "height": 1920,
+  "defaults": {
+    "image": { "resize": "cover" },
+    "text": {
+      "style": "008",
+      "settings": {
+        "font-size": "72px",
+        "color": "white",
+        "font-weight": "800",
+        "text-shadow": "0 2px 12px rgba(0,0,0,.75)"
+      }
+    },
+    "sceneDuration": 3
+  },
+  "beats": [
+    { "role": "hook", "notes": "Centered headline; dark scrim if needed for readability" },
+    { "role": "beat", "notes": "Same fonts as hook; Sandals or Beaches brand-pure images only" },
+    { "role": "beat", "notes": "Consistent type system — no mid-Reel font swap" },
+    { "role": "beat", "notes": "Full-bleed photo edge-to-edge; no letterboxing" },
+    { "role": "cta", "notes": "Quiz / ask-me CTA; Kristin adds trending audio after render" }
+  ],
+  "scenes": []
+}

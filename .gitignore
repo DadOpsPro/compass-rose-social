@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+*.mp4
+*.mov
+node_modules/
+.DS_Store
+.mcp.local.json
+renders/
+out/
+dist/
+*.log
+.secrets/

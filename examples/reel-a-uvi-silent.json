@@ -1,0 +1,134 @@
+{
+  "comment": "Compass Rose Sandals Reel A-style silent dry-run \u2014 UVI assets, resize:cover, no audio",
+  "quality": "high",
+  "resolution": "custom",
+  "width": 1080,
+  "height": 1920,
+  "scenes": [
+    {
+      "duration": 3,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-uvi/01-jamaica-sandals-pool.jpg",
+          "resize": "cover"
+        },
+        {
+          "type": "text",
+          "text": "All-inclusive isn't\nthe flex you think",
+          "x": "center",
+          "y": 1380,
+          "width": "90%",
+          "style": "008",
+          "settings": {
+            "font-size": "68px",
+            "color": "white",
+            "font-weight": "800",
+            "text-shadow": "0 2px 12px rgba(0,0,0,.75)",
+            "text-align": "center"
+          }
+        }
+      ]
+    },
+    {
+      "duration": 3,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-uvi/03-sandals-couple-beach.jpg",
+          "resize": "cover"
+        },
+        {
+          "type": "text",
+          "text": "The 'cheap' deal\nusually isn't",
+          "x": "center",
+          "y": 1380,
+          "width": "90%",
+          "style": "008",
+          "settings": {
+            "font-size": "68px",
+            "color": "white",
+            "font-weight": "800",
+            "text-shadow": "0 2px 12px rgba(0,0,0,.75)",
+            "text-align": "center"
+          }
+        }
+      ]
+    },
+    {
+      "duration": 3,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-uvi/02-jamaica-overwater-bungalows.jpg",
+          "resize": "cover"
+        },
+        {
+          "type": "text",
+          "text": "Airport currency desk\nis not your friend",
+          "x": "center",
+          "y": 1380,
+          "width": "90%",
+          "style": "008",
+          "settings": {
+            "font-size": "68px",
+            "color": "white",
+            "font-weight": "800",
+            "text-shadow": "0 2px 12px rgba(0,0,0,.75)",
+            "text-align": "center"
+          }
+        }
+      ]
+    },
+    {
+      "duration": 3,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-uvi/04-st-vincent-room-exterior.jpg",
+          "resize": "cover"
+        },
+        {
+          "type": "text",
+          "text": "Ask me before you\nbook the 'deal'",
+          "x": "center",
+          "y": 1380,
+          "width": "90%",
+          "style": "008",
+          "settings": {
+            "font-size": "68px",
+            "color": "white",
+            "font-weight": "800",
+            "text-shadow": "0 2px 12px rgba(0,0,0,.75)",
+            "text-align": "center"
+          }
+        }
+      ]
+    },
+    {
+      "duration": 3,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-uvi/05-curacao-room-pool-exterior.jpg",
+          "resize": "cover"
+        },
+        {
+          "type": "text",
+          "text": "Which Sandals fits\nyou? Link in bio",
+          "x": "center",
+          "y": 1380,
+          "width": "90%",
+          "style": "008",
+          "settings": {
+            "font-size": "68px",
+            "color": "white",
+            "font-weight": "800",
+            "text-shadow": "0 2px 12px rgba(0,0,0,.75)",
+            "text-align": "center"
+          }
+        }
+      ]
+    }
+  ]
+}

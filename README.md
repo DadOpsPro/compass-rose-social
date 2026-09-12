@@ -7,7 +7,7 @@ Kristin adds trending audio in review. No talking-head. No auto-post without GO.
 ## Setup (Claude Code)
 
 1. Clone this repo and open it in Claude Code.
-2. Set your API key in the environment (do not commit it):
+2. Set your API key in the **local** environment (do not commit it; see [Secrets](#secrets)):
 
    ```bash
    export JSON2VIDEO_API_KEY=your_key_here
@@ -20,6 +20,14 @@ Kristin adds trending audio in review. No talking-head. No auto-post without GO.
    ```
 
 4. Restart / new session → run `/mcp` and confirm `json2video` is connected.
+
+
+## Secrets
+
+| Where | What |
+|---|---|
+| **Claude Code (local)** | Export `JSON2VIDEO_API_KEY` in your shell / Claude env so `.mcp.json` / MCP can use it. Repo secrets are **not** injected into Claude Code. |
+| **GitHub Actions** | The repository secret `JSON2VIDEO_API_KEY` is for CI workflows only (when we add a render workflow). Never commit the key. |
 
 ## Quick dry-run
 

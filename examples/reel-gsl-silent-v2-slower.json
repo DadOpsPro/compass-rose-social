@@ -1,0 +1,200 @@
+{
+  "comment": "GSL silent Reel \u2014 slower starting point for Chris to tweak. Knobs: scenes[].duration (beat length), scenes[].transition.duration (fade), image.zoom (1-2 subtle, 3+ aggressive), image.pan (left/right/top/bottom). Avoid style 008 (invisible). Prefer style 001 + Montserrat settings.",
+  "quality": "high",
+  "resolution": "custom",
+  "width": 1080,
+  "height": 1920,
+  "scenes": [
+    {
+      "duration": 3.5,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-gsl/01-aerial-beach-and-pool.jpg",
+          "resize": "cover",
+          "zoom": 2,
+          "pan": "right",
+          "z-index": 0
+        },
+        {
+          "type": "text",
+          "text": "All-inclusive isn't\nthe flex you think",
+          "style": "001",
+          "x": "center",
+          "width": "90%",
+          "z-index": 10,
+          "fade-in": 0.2,
+          "settings": {
+            "font-family": "Montserrat",
+            "font-size": "64px",
+            "font-weight": "800",
+            "color": "#FFFFFF",
+            "text-align": "center",
+            "text-shadow": "0 2px 12px rgba(0,0,0,0.85)",
+            "vertical-position": "bottom",
+            "horizontal-position": "center",
+            "background-color": "rgba(0,0,0,0.45)",
+            "padding": "18px 24px",
+            "border-radius": "12px"
+          }
+        }
+      ]
+    },
+    {
+      "duration": 3.5,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-gsl/02-ocean-swings.jpg",
+          "resize": "cover",
+          "zoom": 2,
+          "pan": "left",
+          "z-index": 0
+        },
+        {
+          "type": "text",
+          "text": "The 'cheap' deal\nusually isn't",
+          "style": "001",
+          "x": "center",
+          "width": "90%",
+          "z-index": 10,
+          "fade-in": 0.2,
+          "settings": {
+            "font-family": "Montserrat",
+            "font-size": "64px",
+            "font-weight": "800",
+            "color": "#FFFFFF",
+            "text-align": "center",
+            "text-shadow": "0 2px 12px rgba(0,0,0,0.85)",
+            "vertical-position": "bottom",
+            "horizontal-position": "center",
+            "background-color": "rgba(0,0,0,0.45)",
+            "padding": "18px 24px",
+            "border-radius": "12px"
+          }
+        }
+      ],
+      "transition": {
+        "style": "fade",
+        "duration": 0.35
+      }
+    },
+    {
+      "duration": 3.5,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-gsl/03-romantic-dining.jpg",
+          "resize": "cover",
+          "zoom": 2,
+          "pan": "top",
+          "z-index": 0
+        },
+        {
+          "type": "text",
+          "text": "Airport currency desk\nis not your friend",
+          "style": "001",
+          "x": "center",
+          "width": "90%",
+          "z-index": 10,
+          "fade-in": 0.2,
+          "settings": {
+            "font-family": "Montserrat",
+            "font-size": "64px",
+            "font-weight": "800",
+            "color": "#FFFFFF",
+            "text-align": "center",
+            "text-shadow": "0 2px 12px rgba(0,0,0,0.85)",
+            "vertical-position": "bottom",
+            "horizontal-position": "center",
+            "background-color": "rgba(0,0,0,0.45)",
+            "padding": "18px 24px",
+            "border-radius": "12px"
+          }
+        }
+      ],
+      "transition": {
+        "style": "fade",
+        "duration": 0.35
+      }
+    },
+    {
+      "duration": 3.5,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-gsl/04-private-pool.jpg",
+          "resize": "cover",
+          "zoom": 2,
+          "pan": "bottom",
+          "z-index": 0
+        },
+        {
+          "type": "text",
+          "text": "Ask me before you\nbook the 'deal'",
+          "style": "001",
+          "x": "center",
+          "width": "90%",
+          "z-index": 10,
+          "fade-in": 0.2,
+          "settings": {
+            "font-family": "Montserrat",
+            "font-size": "64px",
+            "font-weight": "800",
+            "color": "#FFFFFF",
+            "text-align": "center",
+            "text-shadow": "0 2px 12px rgba(0,0,0,0.85)",
+            "vertical-position": "bottom",
+            "horizontal-position": "center",
+            "background-color": "rgba(0,0,0,0.45)",
+            "padding": "18px 24px",
+            "border-radius": "12px"
+          }
+        }
+      ],
+      "transition": {
+        "style": "fade",
+        "duration": 0.35
+      }
+    },
+    {
+      "duration": 3.5,
+      "elements": [
+        {
+          "type": "image",
+          "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-gsl/05-evening-aerial.jpg",
+          "resize": "cover",
+          "zoom": 2,
+          "pan": "right",
+          "z-index": 0
+        },
+        {
+          "type": "text",
+          "text": "Which Sandals fits\nyou? Link in bio",
+          "style": "001",
+          "x": "center",
+          "width": "90%",
+          "z-index": 10,
+          "fade-in": 0.2,
+          "settings": {
+            "font-family": "Montserrat",
+            "font-size": "64px",
+            "font-weight": "800",
+            "color": "#FFFFFF",
+            "text-align": "center",
+            "text-shadow": "0 2px 12px rgba(0,0,0,0.85)",
+            "vertical-position": "bottom",
+            "horizontal-position": "center",
+            "background-color": "rgba(0,0,0,0.45)",
+            "padding": "18px 24px",
+            "border-radius": "12px"
+          }
+        }
+      ],
+      "transition": {
+        "style": "fade",
+        "duration": 0.35
+      }
+    }
+  ]
+}

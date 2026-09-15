@@ -1,4 +1,6 @@
-# JSON2Video knobs (GSL Reel)
+# JSON2Video knobs (GSL Reel) — historical
+
+**Finals use [`renderer/`](../renderer/) now.** This page describes the old SaaS movie JSON (`examples/reel-*.json`). The free JSON2Video plan watermarks exports. For the local schema and knobs see [SELF-HOST-RENDERER.md](SELF-HOST-RENDERER.md).
 
 Chris feedback (2026-09-13): v2 zoom + transitions felt too fast.
 

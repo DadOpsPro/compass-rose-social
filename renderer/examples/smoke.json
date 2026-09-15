@@ -1,0 +1,41 @@
+{
+  "comment": "Offline-friendly smoke timeline. Public London stills (no API key). Swap src for local files or color:#1B4F72.",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "scenes": [
+    {
+      "duration": 2.2,
+      "image": {
+        "src": "https://cdn.json2video.com/assets/images/london-01.jpg",
+        "fit": "cover",
+        "zoom": 1.08,
+        "pan": "right"
+      },
+      "text": {
+        "content": "All-inclusive isn't\nthe flex you think",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    },
+    {
+      "duration": 2.2,
+      "transition": { "type": "fade", "duration": 0.35 },
+      "image": {
+        "src": "https://cdn.json2video.com/assets/images/london-02.jpg",
+        "fit": "cover",
+        "zoom": 1.1,
+        "pan": "left"
+      },
+      "text": {
+        "content": "The cheap deal\nusually isn't",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    }
+  ]
+}

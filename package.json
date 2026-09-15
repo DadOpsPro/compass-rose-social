@@ -1,0 +1,13 @@
+{
+  "name": "compass-rose-social",
+  "private": true,
+  "type": "module",
+  "description": "Compass Rose Leisure silent Reels — local FFmpeg renderer, not JSON2Video.",
+  "scripts": {
+    "render": "node renderer/bin/render.mjs",
+    "smoke": "node renderer/bin/smoke.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

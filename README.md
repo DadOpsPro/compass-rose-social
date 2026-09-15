@@ -1,44 +1,37 @@
 # Compass Rose Social
 
-Silent 9:16 Reels for Compass Rose Leisure — **Claude Code + JSON2Video**.
+Silent 9:16 Reels for Compass Rose Leisure.
+
+**Production renders use the local FFmpeg renderer in [`renderer/`](renderer/)** — not JSON2Video. The SaaS free plan watermarks every export; this repo does not require an API key or a paid plan.
 
 Kristin adds trending audio in review. No talking-head. No auto-post without GO.
 
-## Setup (Claude Code)
+## Quick start (Mac)
 
-1. Clone this repo and open it in Claude Code.
-2. Set your API key in the **local** environment (do not commit it; see [Secrets](#secrets)):
+```bash
+brew install ffmpeg
+npm run smoke
+# → out/smoke.mp4  (silent 1080×1920, no watermark)
+```
 
-   ```bash
-   export JSON2VIDEO_API_KEY=your_key_here
-   ```
+```bash
+npm run render -- examples/self-host-gsl-silent.json -o out/gsl.mp4
+# or
+node renderer/bin/render.mjs renderer/examples/smoke.json -o out/reel.mp4
+```
 
-3. MCP is declared in `.mcp.json`. If `${JSON2VIDEO_API_KEY}` does not expand in your Claude Code build, set the key via Claude settings / shell env and keep `.mcp.json` as-is, or use:
-
-   ```bash
-   claude mcp add-json json2video '{"type":"stdio","command":"npx","args":["-y","@json2video/cli","mcp"],"env":{"JSON2VIDEO_API_KEY":"YOUR_KEY"}}'
-   ```
-
-4. Restart / new session → run `/mcp` and confirm `json2video` is connected.
-
-
-## Secrets
-
-| Where | What |
-|---|---|
-| **Claude Code (local)** | Export `JSON2VIDEO_API_KEY` in your shell / Claude env so `.mcp.json` / MCP can use it. Repo secrets are **not** injected into Claude Code. |
-| **GitHub Actions** | The repository secret `JSON2VIDEO_API_KEY` is for CI workflows only (when we add a render workflow). Never commit the key. |
-
-## Quick dry-run
-
-Render `examples/dry-run-silent.json` (placeholder images; production uses UVI Sandals/Beaches assets).
-
-See [docs/RULES.md](docs/RULES.md) and [docs/QUEUE.md](docs/QUEUE.md).
+Full setup, schema, and knobs: [docs/SELF-HOST-RENDERER.md](docs/SELF-HOST-RENDERER.md) and [renderer/README.md](renderer/README.md).
 
 ## Split of ownership
 
 | Layer | Owner |
 |---|---|
-| Templates, movie JSON, MCP config | This repo (you + Claude Code) |
+| Templates, timeline JSON, local renderer | This repo (you + Claude Code) |
 | Queue Sheet / Drive MP4s | Google |
 | STATUS, Kristin review ops | Grok Bot project *Compass Rose Social* |
+
+## Historical JSON2Video
+
+Older movie JSON lives under `examples/reel-*.json` and talks to JSON2Video MCP (`.mcp.json`). Keep those files as reference. Do **not** submit them to `renderer/` — the schemas differ. The JSON2Video free-plan watermark is why finals moved in-house.
+
+If you still need the old MCP locally, `JSON2VIDEO_API_KEY` stays in your shell only (see `.env.example`). Repo secrets are not injected into Claude Code.

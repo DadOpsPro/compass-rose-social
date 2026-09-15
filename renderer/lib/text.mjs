@@ -80,7 +80,8 @@ export function wrapText(content, fontSize, canvasWidth) {
         line = word;
       }
     }
-    out.push(line);
+    // ExtraBold is tight; a double space keeps words readable on a phone.
+    out.push(line.replaceAll(" ", "  "));
   }
   return out.length ? out : [""];
 }

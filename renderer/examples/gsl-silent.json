@@ -1,0 +1,92 @@
+{
+  "comment": "GSL silent Reel — local renderer schema (NOT JSON2Video). Drop brand-pure stills into renderer/examples/assets/ and point src at them. HTTPS URLs and color:#RRGGBB also work. Kristin adds trending audio in IG/TikTok.",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "scenes": [
+    {
+      "duration": 3.5,
+      "image": {
+        "src": "./assets/01.jpg",
+        "fit": "cover",
+        "zoom": 1.08,
+        "pan": "right"
+      },
+      "text": {
+        "content": "All-inclusive isn't\nthe flex you think",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    },
+    {
+      "duration": 3.5,
+      "transition": { "type": "fade", "duration": 0.35 },
+      "image": {
+        "src": "./assets/02.jpg",
+        "fit": "cover",
+        "zoom": 1.08,
+        "pan": "left"
+      },
+      "text": {
+        "content": "The 'cheap' deal\nusually isn't",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    },
+    {
+      "duration": 3.5,
+      "transition": { "type": "fade", "duration": 0.35 },
+      "image": {
+        "src": "./assets/03.jpg",
+        "fit": "cover",
+        "zoom": 1.08,
+        "pan": "top"
+      },
+      "text": {
+        "content": "Airport currency desk\nis not your friend",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    },
+    {
+      "duration": 3.5,
+      "transition": { "type": "fade", "duration": 0.35 },
+      "image": {
+        "src": "./assets/04.jpg",
+        "fit": "cover",
+        "zoom": 1.08,
+        "pan": "bottom"
+      },
+      "text": {
+        "content": "Ask me before you\nbook the 'deal'",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    },
+    {
+      "duration": 3.5,
+      "transition": { "type": "fade", "duration": 0.35 },
+      "image": {
+        "src": "./assets/05.jpg",
+        "fit": "cover",
+        "zoom": 1.08,
+        "pan": "right"
+      },
+      "text": {
+        "content": "Which Sandals fits\nyou? Link in bio",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    }
+  ]
+}

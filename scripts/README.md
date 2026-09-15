@@ -1,19 +1,22 @@
 # Render scripts
 
-## Claude Code (preferred)
+## Local renderer (production)
 
-1. Export `JSON2VIDEO_API_KEY` (or set it in Claude Code / shell env).
-2. Open this repo; confirm `.mcp.json` loads (`/mcp` → `json2video` connected).
-3. Ask Claude Code to validate and render `examples/dry-run-silent.json` (silent, 9:16, `resize: cover`).
-4. Save the CDN MP4 into the Drive queue folder; update the Sheet.
+```bash
+brew install ffmpeg          # Mac
+npm run smoke                # writes out/smoke.mp4
+npm run render -- examples/self-host-gsl-silent.json -o out/gsl.mp4
+```
 
-## CLI
+See [renderer/README.md](../renderer/README.md) and [docs/SELF-HOST-RENDERER.md](../docs/SELF-HOST-RENDERER.md).
+
+Always: no audio; images `fit: "cover"`; no JSON2Video API key.
+
+## Historical JSON2Video (do not use for finals)
+
+The files in `examples/reel-*.json` are the old SaaS movies. Free-plan renders are watermarked.
 
 ```bash
 export JSON2VIDEO_API_KEY=...
 npx -y @json2video/cli movie render examples/dry-run-silent.json
 ```
-
-(Exact subcommands may vary — check `npx @json2video/cli --help`.)
-
-Always: no audio element; images use `"resize": "cover"`.

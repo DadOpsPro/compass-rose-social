@@ -3,6 +3,8 @@
  * Schema is inspired by JSON2Video but is not compatible with it.
  */
 
+import { DEFAULT_FONT_ID, normalizeFontId, unknownFontError } from "./fonts.mjs";
+
 const DEFAULTS = {
   width: 1080,
   height: 1920,
@@ -27,6 +29,7 @@ export function parseTimeline(raw, { sourceLabel = "timeline" } = {}) {
     throw fail("timeline.scenes must be a non-empty array");
   }
 
+  const font = parseRootFont(raw);
   const scenes = raw.scenes.map((scene, i) => parseScene(scene, i));
   const plan = planTransitions(scenes);
 
@@ -35,15 +38,48 @@ export function parseTimeline(raw, { sourceLabel = "timeline" } = {}) {
     width,
     height,
     fps,
+    font,
     scenes,
     plan,
   };
+}
+
+/**
+ * One typeface per Reel (Kristin / Compass Rose). Root `font` or synonym
+ * `typeface`. Per-scene text.font is rejected so beats cannot drift.
+ */
+function parseRootFont(raw) {
+  const hasFont = raw.font != null && raw.font !== "";
+  const hasTypeface = raw.typeface != null && raw.typeface !== "";
+
+  if (hasFont && hasTypeface) {
+    const a = normalizeFontId(raw.font);
+    const b = normalizeFontId(raw.typeface);
+    if (a !== b) {
+      throw fail(
+        `font ("${raw.font}") and typeface ("${raw.typeface}") disagree; set one at the timeline root`,
+      );
+    }
+    if (!a) throw unknownFontError(raw.font);
+    return a;
+  }
+
+  const rawId = hasFont ? raw.font : hasTypeface ? raw.typeface : DEFAULT_FONT_ID;
+  const id = normalizeFontId(rawId);
+  if (!id) throw unknownFontError(rawId);
+  return id;
 }
 
 function parseScene(scene, index) {
   const label = `scenes[${index}]`;
   if (scene == null || typeof scene !== "object") {
     throw fail(`${label} must be an object`);
+  }
+
+  if (scene.font != null || scene.typeface != null) {
+    throw fail(
+      `${label}.font is not allowed. Set "font" once at the timeline root so every beat uses the same typeface.`,
+    );
   }
 
   const duration = numberField(scene.duration, null, `${label}.duration`);
@@ -93,6 +129,12 @@ function parseImage(image, label) {
 function parseText(text, label) {
   if (text == null) return null;
   if (typeof text !== "object") throw fail(`${label}.text must be an object or omitted`);
+
+  if (text.font != null || text.typeface != null || text.fontFamily != null) {
+    throw fail(
+      `${label}.text.font is not allowed. Set "font" once at the timeline root so every beat uses the same typeface.`,
+    );
+  }
 
   const content = text.content != null ? String(text.content) : "";
   if (!content.trim()) return null;

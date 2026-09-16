@@ -9,7 +9,9 @@
   },
   "scripts": {
     "render": "node bin/render.mjs",
-    "smoke": "node bin/smoke.mjs"
+    "smoke": "node bin/smoke.mjs",
+    "fonts": "node bin/fonts.mjs",
+    "fonts-smoke": "node bin/fonts-smoke.mjs"
   },
   "engines": {
     "node": ">=18"

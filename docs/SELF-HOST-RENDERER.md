@@ -25,17 +25,20 @@ Homebrew’s `ffmpeg` formula includes both. Then:
 ```bash
 npm run smoke
 # → out/smoke.mp4  (1080×1920, silent, >100KB)
+npm run fonts
+# → montserrat (default), bebas, oswald, playfair, poppins, anton
 ```
 
 Linux: `sudo apt install ffmpeg`. Same `npm run smoke`.
 
-No JSON2Video API key. No `npm install` (zero Node dependencies). Montserrat ExtraBold is bundled at `renderer/fonts/` (SIL OFL).
+No JSON2Video API key. No `npm install` (zero Node dependencies). Six SIL OFL typefaces are bundled under `renderer/fonts/<preset>/`. Default is Montserrat ExtraBold (`montserrat`). List ids: `npm run fonts`.
 
 ## Render a timeline
 
 ```bash
 npm run render -- renderer/examples/smoke.json -o out/reel.mp4
 node renderer/bin/render.mjs examples/self-host-gsl-silent.json -o out/gsl.mp4
+node renderer/bin/render.mjs examples/self-host-gsl-drive-bebas.json -o out/gsl-bebas.mp4
 ```
 
 Drop MP4s into the Drive queue folder; never commit them. See [QUEUE.md](QUEUE.md).
@@ -49,6 +52,7 @@ Old files under `examples/reel-*.json` use JSON2Video `elements[]` / `style: "00
   "width": 1080,
   "height": 1920,
   "fps": 30,
+  "font": "montserrat",
   "scenes": [
     {
       "duration": 3.5,
@@ -68,6 +72,8 @@ Old files under `examples/reel-*.json` use JSON2Video `elements[]` / `style: "00
 
 Paths in `image.src` are relative to the JSON file. `https://` URLs are downloaded at render time. `color:#1B4F72` builds a placeholder still.
 
+**Font:** set `"font"` (or `"typeface"`) at this root only. Every scene’s `text` is drawn in that face. Kristin’s rule: do not swap type systems mid-Reel. Different Reels may pick different presets.
+
 ## Knobs
 
 Chris (2026-09-13): JSON2Video v2 zoom + 0.5s fades felt too fast. Start here and nudge.
@@ -79,7 +85,8 @@ Chris (2026-09-13): JSON2Video v2 zoom + 0.5s fades felt too fast. Start here an
 | Zoom | `image.zoom` | **1.08** (subtle 1.05–1.12) | Scale factor, **not** JSON2Video’s 1–3 intensity. `1` = still. `1.2+` looks jumpy |
 | Pan | `image.pan` | `left` / `right` / `top` / `bottom` / `center` | Needs zoom > 1 (if you set pan with zoom `1`, the renderer applies 1.08 overscan so the move is visible) |
 | Cover | `image.fit` | `cover` only | Full-bleed crop. No letterboxing |
-| Type | `text.content` | two short lines | `\n` or a real newline. Montserrat ExtraBold, white, dark bar + shadow |
+| Font | root `font` (or `typeface`) | **`montserrat`** | One type system per Reel — same face on every beat. Valid ids: `montserrat`, `bebas`, `oswald`, `playfair`, `poppins`, `anton`. Omit for Montserrat ExtraBold. Do **not** set `text.font` on a scene (rejected). `npm run fonts` |
+| Type | `text.content` | two short lines | `\n` or a real newline. White, dark bar + shadow. Face comes from root `font` |
 | Placement | `text.position` | `lower-third` | Also `center`, `top`. Sits above IG/TikTok chrome |
 | Size | `text.fontSize` | `64` | ~56–72 on 1080px |
 | Bar | `text.background` | `rgba(0,0,0,0.45)` | `none` = shadow only |
@@ -102,6 +109,7 @@ No SaaS, no logo, no burned-in URL.
 | `Image not found` | Paths are relative to the **JSON file**, not the cwd |
 | Letterboxing / black bars | Use `fit: "cover"` and a real photo; do not pre-pad the still |
 | Type too fast / zoompy | Lower `zoom` toward 1.05; raise `duration`; shorten `transition.duration` |
+| `Unknown font "..."` | Use a listed id: `montserrat` `bebas` `oswald` `playfair` `poppins` `anton`. `npm run fonts` |
 | Old JSON2Video file rejected | Convert to the schema above; keep `examples/reel-*.json` as reference only |
 | Want intermediates | `node renderer/bin/render.mjs … --keep-temp --verbose` |
 

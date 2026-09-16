@@ -3,21 +3,23 @@ import { runCommand, escapeFilterPath } from "./ffmpeg.mjs";
 
 /**
  * Rasterize a lower-third (or center/top) caption to a full-canvas RGBA PNG.
- * Uses FFmpeg drawtext + the bundled Montserrat ExtraBold file so Mac/Linux
+ * Uses FFmpeg drawtext + a bundled OFL/Apache typeface so Mac/Linux
  * do not need a system font install. A 90%-width dark bar + strong shadow
  * keeps white type readable on bright travel photos.
+ * The face is chosen once per Reel (timeline.font) and applied to every beat.
  */
 export async function renderTextOverlay({
   ffmpeg,
   dest,
   textFile,
   fontFile,
+  wrap,
   width,
   height,
   text,
   verbose,
 }) {
-  const lines = wrapText(text.content, text.fontSize, width);
+  const lines = wrapText(text.content, text.fontSize, width, wrap);
   await writeFile(textFile, lines.join("\n"), "utf8");
 
   const box = parseBackground(text.background);
@@ -59,10 +61,12 @@ export async function renderTextOverlay({
   return dest;
 }
 
-export function wrapText(content, fontSize, canvasWidth) {
+export function wrapText(content, fontSize, canvasWidth, metrics) {
+  const emScale = metrics?.emScale ?? 0.58;
+  const wordGap = metrics?.wordGap ?? true;
   const explicit = String(content).replaceAll("\\n", "\n").split(/\n/);
   const maxWidth = canvasWidth * 0.82;
-  const em = fontSize * 0.58;
+  const em = fontSize * emScale;
   const maxChars = Math.max(8, Math.floor(maxWidth / em));
 
   const out = [];
@@ -80,8 +84,8 @@ export function wrapText(content, fontSize, canvasWidth) {
         line = word;
       }
     }
-    // ExtraBold is tight; a double space keeps words readable on a phone.
-    out.push(line.replaceAll(" ", "  "));
+    // ExtraBold (montserrat) is tight; a double space keeps words readable.
+    out.push(wordGap ? line.replaceAll(" ", "  ") : line);
   }
   return out.length ? out : [""];
 }

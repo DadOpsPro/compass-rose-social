@@ -2,6 +2,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { renderTimeline } from "../lib/render.mjs";
+import { formatFontHelp } from "../lib/fonts.mjs";
 
 const HELP = `
 Compass Rose silent Reel renderer (local FFmpeg, no watermark, no JSON2Video).
@@ -9,6 +10,7 @@ Compass Rose silent Reel renderer (local FFmpeg, no watermark, no JSON2Video).
 Usage:
   node renderer/bin/render.mjs <timeline.json> -o <out.mp4>
   npm run render -- <timeline.json> -o <out.mp4>
+  npm run fonts
 
 Options:
   -o, --output <file>   Output MP4 (default: out/reel.mp4)
@@ -21,6 +23,8 @@ Options:
 Timeline JSON is a simple scene list. See renderer/README.md and
 docs/SELF-HOST-RENDERER.md. Image src may be a local path, https URL,
 or color:#1B4F72.
+
+${formatFontHelp()}
 `.trim();
 
 function parseArgs(argv) {

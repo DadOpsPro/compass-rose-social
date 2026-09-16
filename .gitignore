@@ -11,3 +11,7 @@ out/
 dist/
 *.log
 .secrets/
+web/.next/
+web/.env.local
+web/drafts/*.json
+!web/drafts/.gitkeep

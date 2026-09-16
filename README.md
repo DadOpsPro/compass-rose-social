@@ -25,6 +25,17 @@ npm run fonts            # list typeface preset ids
 
 Full setup, schema, and knobs: [docs/SELF-HOST-RENDERER.md](docs/SELF-HOST-RENDERER.md) and [renderer/README.md](renderer/README.md).
 
+## Kristin editor (`web/`)
+
+Phone UI to edit beat copy and pick one root `font` preset, then download renderer JSON.
+
+```bash
+cd web && npm install && npm run dev
+# → http://localhost:3000
+```
+
+Deploy `web/` on **Vercel** (Root Directory: `web`). That host is **UI only — no FFmpeg on Vercel**. Remote MP4s come from GitHub Actions [`.github/workflows/render-reel.yml`](.github/workflows/render-reel.yml) (`workflow_dispatch` or `repository_dispatch`). Docs: [web/README.md](web/README.md) and [docs/KRISTIN-EDITOR.md](docs/KRISTIN-EDITOR.md).
+
 ## Split of ownership
 
 | Layer | Owner |

@@ -31,6 +31,8 @@ npm run fonts
 
 Linux: `sudo apt install ffmpeg`. Same `npm run smoke`.
 
+The Kristin editor (`web/`) never runs this renderer. Vercel is UI only. Remote encodes use [`.github/workflows/render-reel.yml`](../.github/workflows/render-reel.yml) (ubuntu FFmpeg). See [KRISTIN-EDITOR.md](KRISTIN-EDITOR.md).
+
 No JSON2Video API key. No `npm install` (zero Node dependencies). Six SIL OFL typefaces are bundled under `renderer/fonts/<preset>/`. Default is Montserrat ExtraBold (`montserrat`). List ids: `npm run fonts`.
 
 ## Render a timeline

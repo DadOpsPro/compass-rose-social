@@ -1,0 +1,93 @@
+{
+  "comment": "Kristin editor sample — self-hosted GSL silent Reel (renderer/ schema, not JSON2Video). CDN stills are a runnable demo only; production: Sandals/UVI photos. Silent; add trending audio in review.",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "font": "montserrat",
+  "scenes": [
+    {
+      "duration": 3.5,
+      "image": {
+        "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-gsl/01-aerial-beach-and-pool.jpg",
+        "fit": "cover",
+        "zoom": 1.08,
+        "pan": "right"
+      },
+      "text": {
+        "content": "All-inclusive isn't\nthe flex you think",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    },
+    {
+      "duration": 3.5,
+      "transition": { "type": "fade", "duration": 0.35 },
+      "image": {
+        "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-gsl/02-ocean-swings.jpg",
+        "fit": "cover",
+        "zoom": 1.08,
+        "pan": "left"
+      },
+      "text": {
+        "content": "The 'cheap' deal\nusually isn't",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    },
+    {
+      "duration": 3.5,
+      "transition": { "type": "fade", "duration": 0.35 },
+      "image": {
+        "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-gsl/03-romantic-dining.jpg",
+        "fit": "cover",
+        "zoom": 1.08,
+        "pan": "top"
+      },
+      "text": {
+        "content": "Airport currency desk\nis not your friend",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    },
+    {
+      "duration": 3.5,
+      "transition": { "type": "fade", "duration": 0.35 },
+      "image": {
+        "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-gsl/04-private-pool.jpg",
+        "fit": "cover",
+        "zoom": 1.08,
+        "pan": "bottom"
+      },
+      "text": {
+        "content": "Ask me before you\nbook the 'deal'",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    },
+    {
+      "duration": 3.5,
+      "transition": { "type": "fade", "duration": 0.35 },
+      "image": {
+        "src": "https://media.json2video.com/vS89jNL6tG/files/compass-rose-gsl/05-evening-aerial.jpg",
+        "fit": "cover",
+        "zoom": 1.08,
+        "pan": "right"
+      },
+      "text": {
+        "content": "Which Sandals fits\nyou? Link in bio",
+        "position": "lower-third",
+        "fontSize": 64,
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0.45)"
+      }
+    }
+  ]
+}

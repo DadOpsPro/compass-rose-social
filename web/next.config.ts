@@ -10,6 +10,15 @@ import type { NextConfig } from "next";
  */
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Local Save draft writes web/drafts/*.json. Ignore those so Next
+  // file-watching does not remount the editor and wipe Kristin's edits.
+  webpack: (config) => {
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: ["**/node_modules/**", "**/.git/**", "**/drafts/**"],
+    };
+    return config;
+  },
 };
 
 export default nextConfig;

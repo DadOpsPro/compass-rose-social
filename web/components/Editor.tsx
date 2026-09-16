@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FONT_OPTIONS, fontOption, type FontId } from "../lib/fonts";
 import {
   applyEdits,
@@ -13,6 +13,8 @@ import {
 } from "../lib/timeline";
 
 type Banner = { kind: "ok" | "warn" | "err"; text: string } | null;
+
+const STORAGE_KEY = "crs-editor-session";
 
 type Props = {
   sample: Timeline;
@@ -27,10 +29,55 @@ export function Editor({ sample, previewUrl, authRequired, renderConfigured }: P
   const [texts, setTexts] = useState(() => sample.scenes.map(sceneText));
   const [busy, setBusy] = useState<"save" | "render" | null>(null);
   const [banner, setBanner] = useState<Banner>(null);
+  const [hydrated, setHydrated] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const selected = fontOption(font);
 
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const saved = JSON.parse(raw) as {
+          draft?: Timeline;
+          font?: FontId;
+          texts?: string[];
+          banner?: Banner;
+        };
+        if (saved.draft && isTimeline(saved.draft) && Array.isArray(saved.texts) && saved.font) {
+          setDraft(saved.draft);
+          setFont(saved.font);
+          setTexts(saved.texts);
+        }
+        if (saved.banner) setBanner(saved.banner);
+      }
+    } catch {
+      // ignore bad session payloads
+    }
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ draft, font, texts, banner }));
+    } catch {
+      // private mode / quota
+    }
+  }, [hydrated, draft, font, texts, banner]);
+
   const current = useMemo(() => applyEdits(draft, font, texts), [draft, font, texts]);
+
+  function persistNow(nextBanner: Banner) {
+    try {
+      sessionStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ draft, font, texts, banner: nextBanner }),
+      );
+    } catch {
+      // private mode / quota
+    }
+    setBanner(nextBanner);
+  }
 
   function resetSample() {
     setDraft(sample);
@@ -45,8 +92,12 @@ export function Editor({ sample, previewUrl, authRequired, renderConfigured }: P
     const a = document.createElement("a");
     a.href = url;
     a.download = downloadFilename(current);
+    a.rel = "noopener";
+    a.style.display = "none";
+    document.body.appendChild(a);
     a.click();
-    URL.revokeObjectURL(url);
+    a.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1500);
   }
 
   async function saveDraft() {
@@ -61,19 +112,19 @@ export function Editor({ sample, previewUrl, authRequired, renderConfigured }: P
       });
       const data = (await res.json()) as { saved?: boolean; path?: string; reason?: string; error?: string };
       if (!res.ok) {
-        setBanner({ kind: "err", text: data.error || "Could not save draft." });
+        persistNow({ kind: "err", text: data.error || "Could not save draft." });
         return;
       }
       if (data.saved && data.path) {
-        setBanner({ kind: "ok", text: `Downloaded JSON and wrote ${data.path}.` });
+        persistNow({ kind: "ok", text: `Downloaded JSON and wrote ${data.path}.` });
       } else {
-        setBanner({
+        persistNow({
           kind: "warn",
           text: data.reason || "Downloaded JSON. On Vercel the app cannot keep a file — Request render or render locally.",
         });
       }
     } catch (err) {
-      setBanner({
+      persistNow({
         kind: "warn",
         text: `Downloaded JSON. Local write skipped (${err instanceof Error ? err.message : "network"}).`,
       });

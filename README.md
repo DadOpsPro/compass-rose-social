@@ -16,8 +16,11 @@ npm run smoke
 
 ```bash
 npm run render -- examples/self-host-gsl-silent.json -o out/gsl.mp4
+# Bebas Neue on every beat (same copy):
+npm run render -- examples/self-host-gsl-drive-bebas.json -o out/gsl-bebas.mp4
 # or
 node renderer/bin/render.mjs renderer/examples/smoke.json -o out/reel.mp4
+npm run fonts            # list typeface preset ids
 ```
 
 Full setup, schema, and knobs: [docs/SELF-HOST-RENDERER.md](docs/SELF-HOST-RENDERER.md) and [renderer/README.md](renderer/README.md).

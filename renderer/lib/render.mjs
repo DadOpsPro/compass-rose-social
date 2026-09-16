@@ -1,8 +1,8 @@
 import { mkdtemp, cp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { parseTimeline, sceneFrameCount } from "./timeline.mjs";
+import { FONT_FILE, resolveFont } from "./fonts.mjs";
 import { materializeImage, ensureDir } from "./assets.mjs";
 import { renderTextOverlay } from "./text.mjs";
 import { probeVideo } from "./probe.mjs";
@@ -14,10 +14,6 @@ import {
   buildXfadeGraph,
   ENCODE_ARGS,
 } from "./ffmpeg.mjs";
-
-const FONT_FILE = fileURLToPath(
-  new URL("../fonts/Montserrat-ExtraBold.ttf", import.meta.url),
-);
 
 export async function renderTimeline({
   timeline: raw,
@@ -35,10 +31,13 @@ export async function renderTimeline({
   await ensureFfmpeg(ffmpeg);
 
   const workDir = await mkdtemp(path.join(tmpdir(), "cr-reel-"));
-  const { width, height, fps, scenes, plan } = timeline;
+  const { width, height, fps, font: fontId, scenes, plan } = timeline;
+  const font = resolveFont(fontId);
 
   try {
-    log(`Canvas ${width}x${height} @ ${fps}fps — ${scenes.length} scene(s), ~${plan.totalDuration.toFixed(2)}s, silent`);
+    log(
+      `Canvas ${width}x${height} @ ${fps}fps — font=${font.id} (${font.family}) — ${scenes.length} scene(s), ~${plan.totalDuration.toFixed(2)}s, silent`,
+    );
 
     const sceneFiles = [];
     for (const scene of scenes) {
@@ -65,7 +64,8 @@ export async function renderTimeline({
           ffmpeg,
           dest: ovDest,
           textFile: txtDest,
-          fontFile: FONT_FILE,
+          fontFile: font.filePath,
+          wrap: font.wrap,
           width,
           height,
           text: scene.text,

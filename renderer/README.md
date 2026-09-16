@@ -32,11 +32,14 @@ Ubuntu/Debian: `sudo apt install ffmpeg` (needs `libx264` + freetype/drawtext â€
 
 Human/LLM-editable. **Not** the old JSON2Video `elements[]` format. Full knobs: [docs/SELF-HOST-RENDERER.md](../docs/SELF-HOST-RENDERER.md). Schema: [schema.json](schema.json).
 
+Pick a typeface **once per Reel** (`"font": "bebas"`). Every beat uses that face. Omit `font` for Montserrat ExtraBold. Do not set `text.font` on a scene. List: `npm run fonts`.
+
 ```json
 {
   "width": 1080,
   "height": 1920,
   "fps": 30,
+  "font": "montserrat",
   "scenes": [
     {
       "duration": 3.5,
@@ -64,9 +67,10 @@ Human/LLM-editable. **Not** the old JSON2Video `elements[]` format. Full knobs: 
 
 | File | Use |
 |---|---|
-| `examples/smoke.json` | Runnable two-beat demo (public stills) |
+| `examples/smoke.json` | Runnable two-beat demo (public stills; default Montserrat) |
 | `examples/gsl-silent.json` | GSL copy with `./assets/0N.jpg` placeholders |
 | `../examples/self-host-gsl-silent.json` | Same copy, CDN stills so it renders without local photos |
+| `../examples/self-host-gsl-drive-bebas.json` | Same copy with `"font": "bebas"` |
 
 Historical JSON2Video movies stay under `../examples/reel-*.json` â€” do not submit those to this renderer.
 
@@ -77,4 +81,7 @@ node renderer/bin/render.mjs <timeline.json> -o out/reel.mp4
   --verbose      ffmpeg logs
   --keep-temp    keep per-scene intermediates
   --ffmpeg PATH  override binary
+
+npm run fonts            list typeface preset ids
+npm run fonts-smoke      render montserrat / bebas / playfair stills and assert they differ
 ```

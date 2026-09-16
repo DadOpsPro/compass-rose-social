@@ -1,0 +1,274 @@
+:root {
+  --navy: #16324f;
+  --navy-deep: #0e2236;
+  --ink: #1a2430;
+  --muted: #5c6670;
+  --sand: #f3eee6;
+  --card: #fffdf8;
+  --line: #d8cfc2;
+  --accent: #c45a32;
+  --accent-ink: #fffdf8;
+  --ok: #1f6b4a;
+  --ok-bg: #e6f4ec;
+  --warn: #8a5a12;
+  --warn-bg: #f8eedc;
+  --err: #8b2e2e;
+  --err-bg: #f8e6e6;
+  --shadow: 0 10px 30px rgba(14, 34, 54, 0.08);
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Source Sans 3", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(1200px 500px at 10% -10%, #dce7f2 0%, transparent 50%),
+    var(--sand);
+  color: var(--ink);
+}
+
+a {
+  color: var(--navy);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.app {
+  width: min(440px, 100%);
+  margin: 0 auto;
+  padding: 20px 16px 140px;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0 0 4px;
+}
+
+h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 28px;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--navy-deep);
+}
+
+.sub {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.ghost {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--navy);
+  border-radius: 999px;
+  padding: 8px 12px;
+  min-height: 40px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+select,
+input[type="password"],
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  padding: 12px 14px;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+textarea {
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.35;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--navy);
+  outline-offset: 1px;
+}
+
+.font-note {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.beat {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.thumb {
+  width: 72px;
+  height: 96px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: var(--navy);
+}
+
+.beat-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.actions {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(243, 238, 230, 0.94);
+  border-top: 1px solid var(--line);
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+}
+
+.actions-inner {
+  width: min(440px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 12px;
+  min-height: 48px;
+  padding: 12px 14px;
+  font-weight: 700;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+}
+
+.btn-primary {
+  background: var(--navy);
+  color: #fff;
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.banner {
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.banner.ok {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+
+.banner.warn {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+
+.banner.err {
+  background: var(--err-bg);
+  color: var(--err);
+}
+
+.video-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--navy-deep);
+}
+
+.video-wrap video {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+}
+
+.login {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.login .card {
+  width: min(400px, 100%);
+}
+
+.fine {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--muted);
+}

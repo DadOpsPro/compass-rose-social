@@ -1,0 +1,137 @@
+# Render a silent 9:16 Reel with the local FFmpeg renderer.
+# This is the v1 remote render path. Do NOT run FFmpeg on Vercel —
+# the Kristin editor (web/) is UI only and dispatches this workflow.
+name: Render Reel
+
+on:
+  workflow_dispatch:
+    inputs:
+      draft_path:
+        description: Path to a renderer timeline JSON in this repo
+        required: true
+        default: examples/self-host-gsl-silent.json
+        type: string
+      output_name:
+        description: Output MP4 filename (no directories)
+        required: false
+        default: reel.mp4
+        type: string
+      commit_stills:
+        description: Commit a first-frame PNG under web/public/previews/
+        required: false
+        default: false
+        type: boolean
+  repository_dispatch:
+    types: [render-reel]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          ffmpeg -hide_banner -version | head -n 1
+          ffmpeg -hide_banner -encoders | grep libx264
+          ffmpeg -hide_banner -filters | grep drawtext
+
+      - name: Prepare draft JSON
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const event = context.eventName;
+            const payload = context.payload || {};
+            let draftPath = null;
+            let outputName = 'reel.mp4';
+            let commitStills = false;
+            let inline = null;
+
+            if (event === 'repository_dispatch') {
+              const p = payload.client_payload || {};
+              inline = p.draft || null;
+              draftPath = p.draft_path || null;
+              outputName = p.output_name || outputName;
+              commitStills = Boolean(p.commit_stills);
+            } else {
+              draftPath = (payload.inputs && payload.inputs.draft_path) || 'examples/self-host-gsl-silent.json';
+              outputName = (payload.inputs && payload.inputs.output_name) || outputName;
+              commitStills = payload.inputs && (payload.inputs.commit_stills === true || payload.inputs.commit_stills === 'true');
+            }
+
+            outputName = String(outputName).replace(/[^A-Za-z0-9._-]/g, '');
+            if (!outputName.toLowerCase().endsWith('.mp4')) outputName += '.mp4';
+            if (!outputName) outputName = 'reel.mp4';
+
+            fs.mkdirSync('out', { recursive: true });
+            fs.mkdirSync('web/drafts', { recursive: true });
+
+            if (inline) {
+              draftPath = 'web/drafts/ci-dispatch.json';
+              fs.writeFileSync(draftPath, JSON.stringify(inline, null, 2));
+            }
+
+            if (!draftPath) {
+              core.setFailed('No draft_path or draft JSON provided');
+              return;
+            }
+            if (!fs.existsSync(draftPath)) {
+              core.setFailed('Draft not found: ' + draftPath);
+              return;
+            }
+
+            core.exportVariable('DRAFT_PATH', draftPath);
+            core.exportVariable('OUTPUT_NAME', outputName);
+            core.exportVariable('COMMIT_STILLS', commitStills ? 'true' : 'false');
+            core.info('Rendering ' + draftPath + ' -> out/' + outputName);
+
+      - name: Render silent Reel
+        run: node renderer/bin/render.mjs "$DRAFT_PATH" -o "out/$OUTPUT_NAME" --verbose
+
+      - name: Extract preview still
+        run: ffmpeg -y -i "out/$OUTPUT_NAME" -frames:v 1 -q:v 3 out/preview-still.png
+
+      - name: Upload MP4 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: reel-mp4
+          path: out/${{ env.OUTPUT_NAME }}
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload preview still artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: reel-preview-still
+          path: out/preview-still.png
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Optionally commit preview still
+        if: env.COMMIT_STILLS == 'true'
+        run: |
+          mkdir -p web/public/previews
+          cp out/preview-still.png web/public/previews/last.png
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/public/previews/last.png
+          if git diff --cached --quiet; then
+            echo "Preview still unchanged"
+          else
+            git commit -m "chore: update Kristin editor preview still"
+            git push
+          fi

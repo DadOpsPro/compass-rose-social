@@ -1,0 +1,28 @@
+{
+  "comment": "CI-sized color placeholder — no network. Not for production.",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "font": "montserrat",
+  "scenes": [
+    {
+      "duration": 1.2,
+      "image": { "src": "color:#1B4F72", "fit": "cover", "zoom": 1.08, "pan": "right" },
+      "text": {
+        "content": "Silent 9:16\nno watermark",
+        "position": "lower-third",
+        "fontSize": 64
+      }
+    },
+    {
+      "duration": 1.2,
+      "transition": { "type": "fade", "duration": 0.25 },
+      "image": { "src": "color:#0E6655", "fit": "cover", "zoom": 1.08, "pan": "left" },
+      "text": {
+        "content": "Actions encode\nFFmpeg only",
+        "position": "lower-third",
+        "fontSize": 64
+      }
+    }
+  ]
+}

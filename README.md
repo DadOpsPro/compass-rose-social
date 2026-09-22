@@ -23,7 +23,9 @@ node renderer/bin/render.mjs renderer/examples/smoke.json -o out/reel.mp4
 npm run fonts            # list typeface preset ids
 ```
 
-Full setup, schema, and knobs: [docs/SELF-HOST-RENDERER.md](docs/SELF-HOST-RENDERER.md) and [renderer/README.md](renderer/README.md).
+GitHub Actions: **Actions → Render silent Reel → Run workflow** (default: color smoke, no CDN). Real batch: commit JSON under `queue/pending/` or wait for Monday 14:00 UTC. MP4s are workflow artifacts — drop them in the [live DadOps Drive folder](https://drive.google.com/drive/folders/1wc353Q7H1jFCBLjtaitj-k_fFki-fXe9).
+
+Full setup, schema, and knobs: [docs/SELF-HOST-RENDERER.md](docs/SELF-HOST-RENDERER.md) and [renderer/README.md](renderer/README.md). Queue + bot routine: [docs/QUEUE.md](docs/QUEUE.md), [docs/BOT-ROUTINE.md](docs/BOT-ROUTINE.md).
 
 ## Split of ownership
 

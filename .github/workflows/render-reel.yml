@@ -1,0 +1,52 @@
+name: Render silent Reel
+
+on:
+  workflow_dispatch:
+    inputs:
+      timeline:
+        description: "Timeline JSON path, or pending for queue/pending/*.json"
+        required: false
+        default: "examples/ci-color-smoke.json"
+  schedule:
+    # Monday 14:00 UTC — render whatever the bot committed to queue/pending
+    - cron: "0 14 * * 1"
+  push:
+    paths:
+      - "queue/pending/**.json"
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          ffmpeg -hide_banner -version | head -1
+          ffmpeg -hide_banner -filters | grep -q drawtext
+          ffmpeg -hide_banner -encoders | grep -q libx264
+
+      - name: Render
+        id: render
+        env:
+          TIMELINE: ${{ github.event_name == 'workflow_dispatch' && inputs.timeline || 'pending' }}
+        run: node scripts/ci-render.mjs
+
+      - name: Upload silent MP4s
+        if: steps.render.outputs.count != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: silent-reels
+          path: out/*.mp4
+          if-no-files-found: error
+          retention-days: 14

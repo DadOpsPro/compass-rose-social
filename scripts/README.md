@@ -8,6 +8,13 @@ npm run smoke                # writes out/smoke.mp4
 npm run render -- examples/self-host-gsl-silent.json -o out/gsl.mp4
 ```
 
+CI (same encoder as Actions):
+
+```bash
+TIMELINE=examples/self-host-gsl-silent.json npm run ci-render
+TIMELINE=pending npm run ci-render   # queue/pending/*.json; no-ops if empty
+```
+
 See [renderer/README.md](../renderer/README.md) and [docs/SELF-HOST-RENDERER.md](../docs/SELF-HOST-RENDERER.md).
 
 Always: no audio; images `fit: "cover"`; no JSON2Video API key.
